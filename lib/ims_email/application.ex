@@ -7,7 +7,13 @@ defmodule ImsEmail.Application do
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: ImsEmail.Worker.start_link(arg)
+      # Start the Telemetry supervisor
+      ImsEmailWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: ImsEmail.PubSub},
+      # Start the Endpoint (http/https)
+      ImsEmailWeb.Endpoint
+      # Start a worker by calling: ImsEmail.Worker.start_link(arg)
       # {ImsEmail.Worker, arg}
     ]
 
@@ -15,5 +21,12 @@ defmodule ImsEmail.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: ImsEmail.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  def config_change(changed, _new, removed) do
+    ImsEmailWeb.Endpoint.config_change(changed, removed)
+    :ok
   end
 end
