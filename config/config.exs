@@ -15,6 +15,9 @@ config :ims_email, ImsEmailWeb.Endpoint,
   pubsub_server: ImsEmail.PubSub,
   live_view: [signing_salt: "OGqSg4nw"]
 
+config :ims_email, ImsEmailWeb.Mailer,
+  adapter: Bamboo.LocalAdapter
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
