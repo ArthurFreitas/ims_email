@@ -7,7 +7,6 @@ defmodule ImsEmail.Mail.MailHelperTest do
   @report "header1,header2\n\rfoo,bar"
 
   describe "send report" do
-
     test "builds and sends a report email" do
       with_mocks([
         { MailBuilder, [], [report_email: fn(_to_email, _report_content) -> :built_email end] },
