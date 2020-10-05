@@ -6,6 +6,7 @@ defmodule ImsEmail.Mail.MailBuilder do
 
     no_reply_base_email(to_email)
     |> subject("Product Report")
+    |> text_body("Attached below is the product report in a .csv format.")
     |> put_attachment(report_attachment)
   end
 

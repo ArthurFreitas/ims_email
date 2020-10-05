@@ -12,6 +12,7 @@ defmodule ImsEmail.Mail.MailBuilderTest do
       assert email.from == "no-reply@ims.com"
       assert email.to == @to_email
       assert email.subject == "Product Report"
+      assert email.text_body == "Attached below is the product report in a .csv format."
       assert hd(email.attachments).filename == "product_report.csv"
       assert hd(email.attachments).data == @report
     end
