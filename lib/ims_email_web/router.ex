@@ -7,6 +7,8 @@ defmodule ImsEmailWeb.Router do
 
   scope "/api", ImsEmailWeb do
     pipe_through :api
+
+    post "/send", EmailController, :send
   end
 
   if Mix.env == :dev do
