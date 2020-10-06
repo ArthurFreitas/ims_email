@@ -4,10 +4,7 @@ defmodule ImsEmailWeb.EmailController do
   alias ImsEmail.Mail.MailHelper
 
   def send(conn, %{"email" => email, "report" => report}) do
-    email
-    |> MailHelper.send_report(report)
-
-    conn
-    |> json("")
+    MailHelper.send_report(email,report)
+    json(conn, "")
   end
 end
