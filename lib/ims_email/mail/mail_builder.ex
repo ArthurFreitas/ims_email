@@ -1,8 +1,7 @@
 defmodule ImsEmail.Mail.MailBuilder do
   import Bamboo.Email
   def report_email(to_email, report_content) do
-    report_attachment = report_content
-      |> data_attachment("product_report.csv")
+    report_attachment = data_attachment(report_content, "product_report.csv")
 
     no_reply_base_email(to_email)
     |> subject("Product Report")
