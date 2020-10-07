@@ -9,6 +9,7 @@ defmodule ImsEmailWeb.Router do
     pipe_through :api
 
     post "/send", EmailController, :send
+    get "/sentry_check", PageController, :sentry_check
   end
 
   if Mix.env == :dev do
