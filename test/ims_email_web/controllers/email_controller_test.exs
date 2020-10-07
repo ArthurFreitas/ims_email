@@ -17,5 +17,14 @@ defmodule ImsEmailWeb.EmailControllerTest do
       assert conn.status == 200
       assert_called(MailHelper.send_report(@email, @report))
     end
+
+    test_with_mock "gives code 400 for a empty report value", %{conn: conn},
+      MailHelper, [], [send_report: fn(_email, "") -> {:error, "report is empty"} end] do
+
+      conn = post(conn, Routes.email_path(conn, :send), %{"email" => @email, "report" => ""})
+
+      assert json_response(conn,400)["reason"] =~ "report is empty"
+      assert_called(MailHelper.send_report(@email, ""))
+    end
   end
 end

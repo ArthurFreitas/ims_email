@@ -4,7 +4,14 @@ defmodule ImsEmailWeb.EmailController do
   alias ImsEmail.Mail.MailHelper
 
   def send(conn, %{"email" => email, "report" => report}) do
-    MailHelper.send_report(email,report)
-    json(conn, "")
+    case MailHelper.send_report(email,report) do
+      :ok ->
+        json(conn, "")
+      {:error, reason} ->
+        Sentry.capture_message("report_email_failed", extra: %{reason: reason})
+        conn
+        |> put_status(:bad_request)
+        |> json(%{reason: reason})
+    end
   end
 end

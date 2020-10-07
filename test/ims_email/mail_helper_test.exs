@@ -18,5 +18,8 @@ defmodule ImsEmail.Mail.MailHelperTest do
         assert_called(MailSender.send(:built_email))
       end
     end
+    test "returns error for a empty report arg" do
+      assert {:error, "report is empty"} == MailHelper.send_report(@email, "")
+    end
   end
 end

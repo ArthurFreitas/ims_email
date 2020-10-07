@@ -3,5 +3,6 @@ defmodule ImsEmail.Mail.MailSender do
 
   def send(email) do
     deliver_now(email)
+    :ok
   end
 end
